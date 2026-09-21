@@ -304,13 +304,13 @@ export default function SuperAdminDashboard() {
           </p>
         </div>
 
-        <button
+        {/* <button
           onClick={refresh}
           className="self-start md:self-center inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition border border-white/20 backdrop-blur-sm shadow-sm cursor-pointer"
         >
           <Sparkles className="w-4 h-4 text-amber-300" />
           Refresh Data
-        </button>
+        </button> */}
       </div>
 
       {/* Organization Seat License Quota Banner */}

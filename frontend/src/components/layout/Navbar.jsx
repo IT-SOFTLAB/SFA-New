@@ -34,15 +34,16 @@ export default function Navbar({
     <header className="h-16 sm:h-18 bg-white border-b border-slate-200 px-3 sm:px-6 flex items-center justify-between z-30 shrink-0">
       {/* Left */}
       <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-        <button
+        {/* <button
           type="button"
           onClick={handleMenuClick}
           className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition focus:outline-none"
           aria-label="Toggle Navigation"
         >
           <Menu size={22} />
-        </button>
+        </button> */}
 
+        
         <div className="min-w-0 truncate">
           <h1 className="text-sm sm:text-xl font-bold text-slate-800 tracking-tight truncate">
             Sales Force Automation

@@ -165,12 +165,12 @@ export default function OrdersPage() {
               <FileSpreadsheet size={16} /> Import Orders (Excel)
             </button>
           )}
-          <button
+          {/* <button
             onClick={loadOrders}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 text-sm font-medium hover:bg-slate-50 transition shadow-sm"
           >
             <RefreshCw size={16} /> Refresh
-          </button>
+          </button> */}
         </div>
       </PageHeader>
 

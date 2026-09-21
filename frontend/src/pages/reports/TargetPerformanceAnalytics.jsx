@@ -132,12 +132,12 @@ export default function TargetPerformanceAnalytics() {
         title="Target & Operational Performance Analytics"
         subtitle="Live performance metrics for Sales Executives (Tasks Target) & Sales Managers (Sales Orders Target)"
       >
-        <button
+        {/* <button
           onClick={loadData}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-medium hover:bg-slate-50 transition shadow-xs cursor-pointer"
         >
           <RefreshCw size={16} /> Refresh Analytics
-        </button>
+        </button> */}
       </PageHeader>
 
       {/* Top KPI Cards with Real DB Explanations */}

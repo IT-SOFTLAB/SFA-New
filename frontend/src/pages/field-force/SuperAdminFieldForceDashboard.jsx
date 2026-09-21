@@ -207,7 +207,7 @@ export default function SuperAdminFieldForceDashboard() {
         welcomeText={`Good ${dayjs().hour() < 12 ? "morning" : dayjs().hour() < 17 ? "afternoon" : "evening"}, ${fullName || "Super Admin"} 👋`}
         title="Field Force Dashboard"
         subtitle="Live system-wide field operations monitoring, task analytics & performance metrics"
-        onRefresh={refresh}
+        // onRefresh={refresh}
         showExport
         // onExport={() => {}}
       />

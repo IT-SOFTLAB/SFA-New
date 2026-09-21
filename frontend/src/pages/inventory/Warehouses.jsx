@@ -283,14 +283,14 @@ export default function Warehouses() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button
+          {/* <button
             onClick={() => fetchData(true)}
             disabled={refreshing}
             className="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-medium text-sm rounded-xl shadow-xs hover:bg-slate-50 transition"
           >
             <RotateCw size={16} className={refreshing ? "animate-spin text-indigo-600" : "text-slate-500"} />
             {refreshing ? "Refreshing..." : "Refresh"}
-          </button>
+          </button> */}
 
           {!isSuperAdmin && (
             <button

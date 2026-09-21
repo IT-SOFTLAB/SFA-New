@@ -438,7 +438,7 @@ export class CRMIntegrationService {
       for (const [key, rows] of grouped.entries()) {
         const firstRow = rows[0];
         const customerId = firstRow.mappedCustomerId;
-        const branchId = firstRow.mappedBranchId || userContext.branchId || null;
+        const branchId = firstRow.mappedBranchId || (firstRow.owner?.branchId || null);
         const territoryId = firstRow.mappedTerritoryId || userContext.territoryId || null;
 
         // Generate Order Number

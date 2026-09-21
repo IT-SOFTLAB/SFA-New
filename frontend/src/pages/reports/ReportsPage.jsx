@@ -62,12 +62,12 @@ export default function ReportsPage() {
         title="Operational Reports & Analytics"
         subtitle="Real-time performance reports across branches, warehouses, stock, products, and field force"
       >
-        <button
+        {/* <button
           onClick={loadReportsData}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-medium hover:bg-slate-50 transition shadow-xs cursor-pointer"
         >
           <RefreshCw size={16} /> Refresh Reports
-        </button>
+        </button> */}
       </PageHeader>
 
       {/* Top Overview KPI Cards */}

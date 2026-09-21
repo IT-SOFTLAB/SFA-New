@@ -278,8 +278,10 @@ export class TargetPerformanceService {
     const branchPerformance = branches.map((b) => {
       const branchUsers = users.filter((u) => u.branchId === b.id);
       const branchUserIds = new Set(branchUsers.map((u) => u.id));
-
-      const branchOrders = orders.filter((o) => o.branchId === b.id || o.owner?.branchId === b.id || branchUserIds.has(o.ownerId));
+      const branchOrders = orders.filter((o) => {
+        const orderBranchId = o.owner?.branchId || o.branchId;
+        return orderBranchId === b.id;
+      });
       const branchCompletedOrders = branchOrders.filter((o) => ["COMPLETED", "DELIVERED", "APPROVED"].includes(o.status));
       const branchTasks = tasks.filter((t) => branchUserIds.has(t.assignedToId));
       const branchCompletedTasks = branchTasks.filter((t) => ["COMPLETED", "CHECKED_OUT"].includes(t.status));
