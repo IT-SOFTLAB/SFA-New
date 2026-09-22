@@ -815,7 +815,7 @@ EOF
                     // NETWORK CONFIGURATION
                     // =========================================================
 
-                    env.VPC_ID = "vpc-08bb09e9a7c10b095default"
+                    env.VPC_ID = "vpc-08bb09e9a7c10b095"
 
                     env.SUBNET_1 = "subnet-06fe5b3d8e95ad780"
                     env.SUBNET_2 = "subnet-0cf9fd6f508540589"
