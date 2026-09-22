@@ -1,0 +1,42 @@
+# Node modules & logs
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Git
+.git
+.gitignore
+
+# Generated Prisma Client (regenerated during build)
+generated/
+
+# Uploads directory contents
+uploads/*
+!uploads/.gitkeep
+
+# Logs
+logs
+*.log
+out.log
+
+# Operating System & IDE metadata
+.DS_Store
+.vscode
+.idea
+Thumbs.db
+
+# Local debug & standalone utility scripts
+clean_*.py
+fix_*.js
+test-*.js
+quick-seed.js
+add_order_name.js
+check_user_columns.js
+create_sample_excel.js
+fix-metadata.cjs

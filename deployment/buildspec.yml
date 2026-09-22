@@ -1,0 +1,60 @@
+version: 0.2
+
+phases:
+
+  pre_build:
+    commands:
+      - echo "=========================================="
+      - echo "AWS CodeBuild - SFA"
+      - echo "=========================================="
+      - echo "Environment : ${ENVIRONMENT}"
+      - echo "Project     : ${PROJECT_NAME}"
+      - echo "Git Tag     : ${GIT_TAG}"
+      - echo "Frontend Tag: ${FRONTEND_TAG}"
+      - echo "Backend Tag : ${BACKEND_TAG}"
+      - echo "=========================================="
+
+      - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+      - ECR_REGISTRY=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
+
+      - echo "AWS Account : ${AWS_ACCOUNT_ID}"
+      - echo "ECR Registry: ${ECR_REGISTRY}"
+
+      - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+
+      - echo "✅ Logged in to ECR"
+
+  build:
+    commands:
+      - echo "=========================================="
+      - echo "Building Frontend Image"
+      - echo "=========================================="
+
+      - docker build -t ${ECR_REGISTRY}/${PROJECT_NAME}-frontend:${FRONTEND_TAG} ./frontend
+
+      - echo "=========================================="
+      - echo "Building Backend Image"
+      - echo "=========================================="
+
+      - docker build -t ${ECR_REGISTRY}/${PROJECT_NAME}-backend:${BACKEND_TAG} ./backend
+
+  post_build:
+    commands:
+      - echo "=========================================="
+      - echo "Pushing Frontend Image"
+      - echo "=========================================="
+
+      - docker push ${ECR_REGISTRY}/${PROJECT_NAME}-frontend:${FRONTEND_TAG}
+
+      - echo "=========================================="
+      - echo "Pushing Backend Image"
+      - echo "=========================================="
+
+      - docker push ${ECR_REGISTRY}/${PROJECT_NAME}-backend:${BACKEND_TAG}
+
+      - echo "=========================================="
+      - echo "CodeBuild Completed"
+      - echo "=========================================="
+      - echo "Frontend: ${ECR_REGISTRY}/${PROJECT_NAME}-frontend:${FRONTEND_TAG}"
+      - echo "Backend : ${ECR_REGISTRY}/${PROJECT_NAME}-backend:${BACKEND_TAG}"
+
