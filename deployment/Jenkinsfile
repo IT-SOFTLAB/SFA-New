@@ -565,90 +565,90 @@ EOF
                     // ==========================================
 
                     sh """
-                        cat > backend-task-definition.json <<EOF
+    cat > backend-task-definition.json <<EOF
 
-                        {
-                            "family": "${BACKEND_TASK_FAMILY}",
+    {
+        "family": "${BACKEND_TASK_FAMILY}",
 
-                            "executionRoleArn": "${BACKEND_EXECUTION_ROLE}",
+        "executionRoleArn": "${BACKEND_EXECUTION_ROLE}",
 
-                            "networkMode": "awsvpc",
+        "networkMode": "awsvpc",
 
-                            "requiresCompatibilities": [
-                                "FARGATE"
-                            ],
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
 
-                            "cpu": "1024",
+        "cpu": "1024",
 
-                            "memory": "3072",
+        "memory": "3072",
 
-                            "runtimePlatform": {
-                                "cpuArchitecture": "X86_64",
-                                "operatingSystemFamily": "LINUX"
-                            },
+        "runtimePlatform": {
+            "cpuArchitecture": "X86_64",
+            "operatingSystemFamily": "LINUX"
+        },
 
-                            "containerDefinitions": [
-                                {
-                                    "name": "${BACKEND_CONTAINER_NAME}",
+        "containerDefinitions": [
+            {
+                "name": "${BACKEND_CONTAINER_NAME}",
 
-                                    "image": "${BACKEND_IMAGE}",
+                "image": "${BACKEND_IMAGE}",
 
-                                    "cpu": 0,
+                "cpu": 0,
 
-                                    "portMappings": [
-                                        {
-                                            "containerPort": "${BACKEND_CONTAINER_PORT}",
-                                            "hostPort": 5000,
-                                            "protocol": "tcp",
-                                            "name": "${BACKEND_CONTAINER_NAME}-5000-tcp",
-                                            "appProtocol": "http"
-                                        }
-                                    ],
+                "portMappings": [
+                    {
+                        "containerPort": "${BACKEND_CONTAINER_PORT}",
+                        "hostPort": 5000,
+                        "protocol": "tcp",
+                        "name": "${BACKEND_CONTAINER_NAME}-5000-tcp",
+                        "appProtocol": "http"
+                    }
+                ],
 
-                                    "essential": true,
+                "essential": true,
 
-                                    "environment": [],
+                "environment": [],
 
-                                    "environmentFiles": [
-                                        {
-                                            "value": "${BACKEND_ENV_FILE_ARN}",
-                                            "type": "s3"
-                                        }
-                                    ],
+                "environmentFiles": [
+                    {
+                        "value": "${BACKEND_ENV_FILE_ARN}",
+                        "type": "s3"
+                    }
+                ],
 
-                                    "mountPoints": [],
+                "mountPoints": [],
 
-                                    "volumesFrom": [],
+                "volumesFrom": [],
 
-                                    "ulimits": [],
+                "ulimits": [],
 
-                                    "logConfiguration": {
-                                        "logDriver": "awslogs",
+                "logConfiguration": {
+                    "logDriver": "awslogs",
 
-                                        "options": {
-                                            "awslogs-group": "${BACKEND_LOG_GROUP}",
-                                            "awslogs-create-group": "true",
-                                            "awslogs-region": "${AWS_REGION}",
-                                            "awslogs-stream-prefix": "ecs"
-                                        }
-                                    },
+                    "options": {
+                        "awslogs-group": "${BACKEND_LOG_GROUP}",
+                        "awslogs-create-group": "true",
+                        "awslogs-region": "${AWS_REGION}",
+                        "awslogs-stream-prefix": "ecs"
+                    }
+                },
 
-                                    "healthCheck": {
-                                        "command": [
-                                            "CMD-SHELL",
-                                            "curl --fail --silent http://127.0.0.1:5000/health > /dev/null || exit 1"
-                                        ],
-                                        "interval": 30,
-                                        "timeout": 5,
-                                        "retries": 3,
-                                        "startPeriod": 60
-                                    }
-                                }
-                            ]
-                        }
+                "healthCheck": {
+                    "command": [
+                        "CMD-SHELL",
+                        "curl --fail --silent http://127.0.0.1:5000/health > /dev/null || exit 1"
+                    ],
+                    "interval": 30,
+                    "timeout": 5,
+                    "retries": 3,
+                    "startPeriod": 60
+                }
+            }
+        ]
+    }
 
-                        EOF
-                    """
+EOF
+"""
 
 
                     // ==========================================
