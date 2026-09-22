@@ -385,89 +385,89 @@ pipeline {
                     // ==========================================
 
                     sh """
-                        cat > frontend-task-definition.json <<EOF
+        cat > frontend-task-definition.json <<EOF
+    {
+        "family": "${FRONTEND_TASK_FAMILY}",
+
+        "executionRoleArn": "${FRONTEND_EXECUTION_ROLE}",
+
+        "networkMode": "awsvpc",
+
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
+
+        "cpu": "1024",
+
+        "memory": "3072",
+
+        "runtimePlatform": {
+            "cpuArchitecture": "X86_64",
+            "operatingSystemFamily": "LINUX"
+        },
+
+        "containerDefinitions": [
+            {
+                "name": "${FRONTEND_CONTAINER_NAME}",
+
+                "image": "${FRONTEND_IMAGE}",
+
+                "cpu": 0,
+
+                "portMappings": [
                     {
-                        "family": "${FRONTEND_TASK_FAMILY}",
-
-                        "executionRoleArn": "${FRONTEND_EXECUTION_ROLE}",
-
-                        "networkMode": "awsvpc",
-
-                        "requiresCompatibilities": [
-                            "FARGATE"
-                        ],
-
-                        "cpu": "1024",
-
-                        "memory": "3072",
-
-                        "runtimePlatform": {
-                            "cpuArchitecture": "X86_64",
-                            "operatingSystemFamily": "LINUX"
-                        },
-
-                        "containerDefinitions": [
-                            {
-                                "name": "${FRONTEND_CONTAINER_NAME}",
-
-                                "image": "${FRONTEND_IMAGE}",
-
-                                "cpu": 0,
-
-                                "portMappings": [
-                                    {
-                                        "containerPort": ${FRONTEND_CONTAINER_PORT},
-                                        "hostPort": 80,
-                                        "protocol": "tcp",
-                                        "name": "${FRONTEND_CONTAINER_NAME}-80-tcp",
-                                        "appProtocol": "http"
-                                    }
-                                ],
-
-                                "essential": true,
-
-                                "environment": [],
-
-                                "environmentFiles": [
-                                    {
-                                        "value": "${FRONTEND_ENV_FILE_ARN}",
-                                        "type": "s3"
-                                    }
-                                ],
-
-                                "mountPoints": [],
-
-                                "volumesFrom": [],
-
-                                "ulimits": [],
-
-                                "logConfiguration": {
-                                    "logDriver": "awslogs",
-
-                                    "options": {
-                                        "awslogs-group": "${FRONTEND_LOG_GROUP}",
-                                        "awslogs-create-group": "true",
-                                        "awslogs-region": "${AWS_REGION}",
-                                        "awslogs-stream-prefix": "ecs"
-                                    }
-                                },
-
-                                "healthCheck": {
-                                    "command": [
-                                        "CMD-SHELL",
-                                        "curl -f http://localhost/ || exit 1"
-                                    ],
-
-                                    "interval": 30,
-                                    "timeout": 5,
-                                    "retries": 3,
-                                    "startPeriod": 10
-                                }
-                            }
-                        ]
+                        "containerPort": ${FRONTEND_CONTAINER_PORT},
+                        "hostPort": 80,
+                        "protocol": "tcp",
+                        "name": "${FRONTEND_CONTAINER_NAME}-80-tcp",
+                        "appProtocol": "http"
                     }
-                    EOF
-                                """
+                ],
+
+                "essential": true,
+
+                "environment": [],
+
+                "environmentFiles": [
+                    {
+                        "value": "${FRONTEND_ENV_FILE_ARN}",
+                        "type": "s3"
+                    }
+                ],
+
+                "mountPoints": [],
+
+                "volumesFrom": [],
+
+                "ulimits": [],
+
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+
+                    "options": {
+                        "awslogs-group": "${FRONTEND_LOG_GROUP}",
+                        "awslogs-create-group": "true",
+                        "awslogs-region": "${AWS_REGION}",
+                        "awslogs-stream-prefix": "ecs"
+                    }
+                },
+
+                "healthCheck": {
+                    "command": [
+                        "CMD-SHELL",
+                        "curl -f http://localhost/ || exit 1"
+                    ],
+
+                    "interval": 30,
+                    "timeout": 5,
+                    "retries": 3,
+                    "startPeriod": 10
+                }
+            }
+        ]
+    }
+EOF
+"""
 
 
                     // ==========================================
