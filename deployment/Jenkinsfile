@@ -416,7 +416,7 @@ pipeline {
 
                                 "portMappings": [
                                     {
-                                        "containerPort": "${FRONTEND_CONTAINER_PORT}",
+                                        "containerPort": ${FRONTEND_CONTAINER_PORT},
                                         "hostPort": 80,
                                         "protocol": "tcp",
                                         "name": "${FRONTEND_CONTAINER_NAME}-80-tcp",
