@@ -597,7 +597,7 @@ EOF
 
                 "portMappings": [
                     {
-                        "containerPort": "${BACKEND_CONTAINER_PORT}",
+                        "containerPort": ${BACKEND_CONTAINER_PORT},
                         "hostPort": 5000,
                         "protocol": "tcp",
                         "name": "${BACKEND_CONTAINER_NAME}-5000-tcp",
