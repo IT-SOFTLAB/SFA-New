@@ -7,6 +7,7 @@ if (config.CLOUDINARY.cloudName && config.CLOUDINARY.apiKey && config.CLOUDINARY
     cloud_name: config.CLOUDINARY.cloudName,
     api_key: config.CLOUDINARY.apiKey,
     api_secret: config.CLOUDINARY.apiSecret,
+    secure: true,
   });
   logger.info('☁️  Cloudinary successfully configured.');
 } else {

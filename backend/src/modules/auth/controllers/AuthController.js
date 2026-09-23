@@ -171,6 +171,17 @@ export class AuthController extends BaseController {
   });
 
   /**
+   * Upload user avatar to Cloudinary
+   */
+  uploadAvatar = this.asyncHandler(async (req, res) => {
+    if (!req.file) {
+      throw AppError.badRequest('No image file uploaded');
+    }
+    const avatarUrl = req.file.secure_url || req.file.path;
+    return this.handleSuccess(res, { avatarUrl }, 'Avatar uploaded successfully', 201);
+  });
+
+  /**
    * Get user sessions
    */
   getSessions = this.asyncHandler(async (req, res) => {

@@ -15,6 +15,14 @@ const authApi = {
     return api.put(`${BASE_URL}/me`, data);
   },
 
+  uploadAvatar(file) {
+    const formData = new FormData();
+    formData.append("avatar", file);
+    return api.post(`${BASE_URL}/avatar`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
+
   changePassword(data) {
     return api.post(`${BASE_URL}/change-password`, data);
   },

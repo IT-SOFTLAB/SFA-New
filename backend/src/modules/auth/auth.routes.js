@@ -3,6 +3,7 @@ import { AuthRepository } from "./auth.repository.js";
 import { AuthService } from "./auth.service.js";
 import { AuthController } from "./controllers/AuthController.js";
 import { authenticate } from "../../middlewares/auth.middleware.js";
+import { uploadPhoto } from "../../middlewares/upload.middleware.js";
 import {
   validateLogin,
   validateVerifyEmail,
@@ -41,6 +42,15 @@ router.post("/reset-password", validateResetPassword, authController.resetPasswo
 router.post("/change-password", authenticate, validateChangePassword, authController.changePassword);
 router.get("/me", authenticate, authController.getMe);
 router.put("/me", authenticate, validateUpdateProfile, authController.updateProfile);
+router.post("/avatar", authenticate, (req, res, next) => {
+  uploadPhoto.any()(req, res, (err) => {
+    if (err) return next(err);
+    if (req.files && req.files.length > 0) {
+      req.file = req.files.find(f => f.fieldname === 'avatar' || f.fieldname === 'photo') || req.files[0];
+    }
+    next();
+  });
+}, authController.uploadAvatar);
 
 // Session management endpoints
 router.get("/sessions", authenticate, authController.getSessions);

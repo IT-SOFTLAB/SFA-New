@@ -38,6 +38,7 @@ export default function SettingsPage() {
 
   // Avatar state
   const [avatarPreview, setAvatarPreview] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   // Profile Form state
   const [formData, setFormData] = useState({
@@ -111,19 +112,17 @@ export default function SettingsPage() {
         toast.error("Image size must be less than 5MB");
         return;
       }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatarPreview(reader.result);
-        toast.success("Profile picture updated in preview! Click 'Save Profile' to keep changes.");
-      };
-      reader.readAsDataURL(file);
+      setSelectedFile(file);
+      setAvatarPreview(URL.createObjectURL(file));
+      toast.success("Profile picture selected! Click 'Save Profile' to upload and save.");
     }
   };
 
   const handleRemoveImage = () => {
+    setSelectedFile(null);
     setAvatarPreview(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
-    toast.success("Profile picture removed.");
+    toast.success("Profile picture removed. Click 'Save Profile' to apply.");
   };
 
   // Submit Profile Information
@@ -131,11 +130,23 @@ export default function SettingsPage() {
     e.preventDefault();
     try {
       setSaving(true);
+      let finalAvatarUrl = avatarPreview;
+
+      // If a new photo was selected, upload it directly to Cloudinary
+      if (selectedFile) {
+        const uploadRes = await authApi.uploadAvatar(selectedFile);
+        finalAvatarUrl = uploadRes.data?.data?.avatarUrl || uploadRes.data?.avatarUrl;
+        setAvatarPreview(finalAvatarUrl);
+        setSelectedFile(null);
+      } else if (!avatarPreview) {
+        finalAvatarUrl = null;
+      }
+
       const payload = {
         firstName: formData.firstName.trim(),
         lastName: formData.lastName.trim(),
         phoneNumber: formData.phoneNumber.trim() || undefined,
-        avatarUrl: avatarPreview,
+        avatarUrl: finalAvatarUrl,
       };
       await authApi.updateProfile(payload);
       if (setUser && user) {
