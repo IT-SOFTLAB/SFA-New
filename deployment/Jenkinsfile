@@ -884,7 +884,7 @@ EOF
                         """,
                         returnStdout: true
                     ).trim()
-// comment
+
 
                     if (!frontendLoadBalancerArn ||  frontendLoadBalancerArn == "None") {
 
