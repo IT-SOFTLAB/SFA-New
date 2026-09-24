@@ -1615,7 +1615,7 @@ EOF
                     if (!backendTaskHealth || backendTaskHealth == "None") {
                         error "❌ No RUNNING backend ECS task found."
                     }
-
+// comment
                     echo "✅ Frontend has RUNNING task(s)."
                     echo "✅ Backend has RUNNING task(s)."
 
