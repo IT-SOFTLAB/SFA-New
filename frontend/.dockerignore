@@ -8,8 +8,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # Local environment files
-.env
-.env.*
 !.env.example
 
 # Git metadata
