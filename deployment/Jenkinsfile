@@ -29,7 +29,7 @@ pipeline {
         FRONTEND_PRODUCTION_ENV_S3_KEY = 'sfa-frontend-production-env'
         BACKEND_STAGING_ENV_S3_KEY = 'sfa-backend-staging-env'
         FRONTEND_STAGING_ENV_S3_KEY = 'sfa-frontend-staging-env'
-
+        ENV_S3_BUCKET = 'its360-secure-env-file'
     }
 
     stages {
@@ -222,8 +222,10 @@ pipeline {
                                         name=GIT_TAG,value=${TAG_NAME},type=PLAINTEXT \
                                         name=BACKEND_TAG,value=${BACKEND_TAG},type=PLAINTEXT \
                                         name=FRONTEND_TAG,value=${FRONTEND_TAG},type=PLAINTEXT \
+                                        name=sr,value=${BACKEND_SECRET_KEY},type=PLAINTEXT \
                                         name=BACKEND_SECRET_KEY,value=${BACKEND_SECRET_KEY},type=PLAINTEXT \
                                         name=FRONTEND_SECRET_KEY,value=${FRONTEND_SECRET_KEY},type=PLAINTEXT \
+                                        name=ENV_S3_BUCKET,value=${ENV_S3_BUCKET},type=PLAINTEXT \
                                     --query 'build.id' \
                                     --output text
                             """,

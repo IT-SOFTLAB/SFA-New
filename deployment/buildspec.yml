@@ -27,6 +27,14 @@ phases:
   build:
     commands:
       - 'echo "=========================================="'
+      - 'echo "Downloading Frontend Environment File"'
+      - 'echo "=========================================="'
+
+      - 'aws s3 cp s3://${ENV_S3_BUCKET}/${FRONTEND_SECRET_KEY} ./frontend/.env'
+
+      - 'echo "Frontend environment file downloaded"'
+
+      - 'echo "=========================================="'
       - 'echo "Building Frontend Image"'
       - 'echo "=========================================="'
 
